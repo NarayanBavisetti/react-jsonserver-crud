@@ -1,11 +1,28 @@
 {
-    "users" : [
-        {
-            "name":"Narayan",
-            "email":"narayan3119@gmail.com",
-            "phone": "98232482438",
-            "id":1
-
-        }
-    ]
+  "users": [
+    {
+      "name": "Narayan",
+      "email": "narayan3119@gmail.com",
+      "phone": "98232482438",
+      "id": 1
+    },
+    {
+      "name": "Paryank",
+      "email": "paryank@gmail.com",
+      "phone": "9326137943",
+      "id": 2
+    },
+    {
+      "name": "Baban",
+      "email": "kuchbhi@gmail.com",
+      "phone": "9137368322",
+      "id": 3
+    },
+    {
+      "name": "sumedha",
+      "email": "nahi hai",
+      "phone": "287209584",
+      "id": 4
+    }
+  ]
 }
