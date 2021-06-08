@@ -1,6 +1,6 @@
 import {
   Button,
-    makeStyles,
+  makeStyles,
   Table,
   TableBody,
   TableCell,
@@ -9,33 +9,35 @@ import {
 } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getUsers } from "./Service/api";
-
+import { deleteUserData, getUsers } from "./Service/api";
 
 const useStyles = makeStyles({
-table:{
-    width:'90%',
-    margin:"50px 0 0 50px",
-    border:"3px solid black"
-},
-theme:{
-    '& > *':{
-        background:"#000000",
-        color:"white",
-        fontSize:15
-    }
-}
-})
+  table: {
+    width: "90%",
+    margin: "50px 0 0 50px",
+    border: "3px solid black",
+  },
+  theme: {
+    "& > *": {
+      background: "#000000",
+      color: "white",
+      fontSize: 15,
+    },
+  },
+});
 export default function UsersList() {
-    const classes = useStyles()
+  const classes = useStyles();
   const [user, setUser] = useState([]);
   useEffect(() => {
-    allUsers()
-   
+    allUsers();
   }, []);
   const allUsers = async () => {
-      const response = await getUsers();
-      setUser(response.data);
+    const response = await getUsers();
+    setUser(response.data);
+  };
+  async function deleteUser(id) {
+    await deleteUserData(id);
+    allUsers();
   }
 
   return (
@@ -52,19 +54,37 @@ export default function UsersList() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {user && user.map((item) => {
-            return (
-              <TableRow>
-                <TableCell>{item.id}</TableCell>
-                <TableCell>{item.name}</TableCell>
-                <TableCell>{item.email}</TableCell>
-                <TableCell>{item.phone}</TableCell>
-                <TableCell>  <Button variant="contained" color="primary"component={Link} to={`/edit/${item.id}`}>Edit</Button></TableCell>
-                <TableCell><Button variant="contained" color="secondary" >Delete</Button></TableCell>
-              </TableRow>
-              
-            );
-          })}
+          {user &&
+            user.map((item) => {
+              return (
+                <TableRow>
+                  <TableCell>{item.id}</TableCell>
+                  <TableCell>{item.name}</TableCell>
+                  <TableCell>{item.email}</TableCell>
+                  <TableCell>{item.phone}</TableCell>
+                  <TableCell>
+                    {" "}
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      component={Link}
+                      to={`/edit/${item.id}`}
+                    >
+                      Edit
+                    </Button>
+                  </TableCell>
+                  <TableCell>
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      onClick={() => deleteUser(item.id)}
+                    >
+                      Delete
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              );
+            })}
         </TableBody>
       </Table>
     </div>
